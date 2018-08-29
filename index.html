@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="This dashboard explains the narrative around refugees and migrants in the news extracted from GDELT.">
+	<meta name="author" content="suad.io">
+
+	<title>Refugees are __________________</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom fonts -->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700" rel="stylesheet">
+
+	<!-- Custom styles -->
+	<link href="css/rr.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+	      integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+	      crossorigin=""/>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+		<div class="container">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top">Refugees are __________________</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				Menu
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#mapcontainer">Map</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#topics">Topics</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#wordcloud">Word Cloud</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link js-scroll-trigger" href="#networkofwords">Network of Words</a>
+					</li>
+					<li class="nav-item">
+						<img style="margin: 18px" src="img/innovationlogo-small.png">
+					</li>
+					<li class="nav-item">
+						<form id="datepickerform" style="margin-top: 15px">
+							<input class="form-control" type="text" id="datepicker" placeholder="Select date here" >
+						</form>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Header -->
+	<header class="masthead">
+		<div class="container d-flex h-100 align-items-center">
+			<div class="mx-auto text-center text-white-70">
+				<h1>Refugees are __________________</h1>
+				<h2 class="mx-auto mt-2 mb-5" style="color: #fed863">How does news media talk about refugees around the world?</h2>
+				<p class="text-left mx-5 text-justify">
+					Unicef has identified Media as one of the factors leading to Xenophobia against refugees. News ‘bubbles’ can polarize host communities and filtered information focused on refugees negative stereotypes can make communication and integration between refugees and host communities much harder leading to a disenfranchised isolated community.
+					<br><br>
+					This dashboard explains the narrative around refugees and migrants in the news extracted from <a href="https://www.gdeltproject.org" style="color:#fed863">GDELT</a>. You can select the date from the calendar on the top side and see the results for that date. Default date is 1st June 2018. Current data available is daily for June 2018
+				</p>
+				<a href="#mapcontainer" class="btn btn-primary js-scroll-trigger">See more</a>
+			</div>
+		</div>
+	</header>
+
+
+	<!-- Map Section -->
+	<section id="mapcontainer">
+		<div class="container pt-5 pb-3">
+
+			<h3>Mapping the Public Opinion</h3>
+			<p>
+				This map shows location of articles that describe refugees (e.g: <b>Refugees are, Asylum seekers are .. etc</b>) and tag it either <span style='color:orange'> negative </span> or <span style='color:blue'>positive/ neutral</span>. The location of the article is extracted from the specific sentence that mentions refugees. If no location found, one location will be selected from the article randomly.<br>
+			<small><i>Disclaimer:  The classifier used to tag articles as positive or negative is still under training which means some results might not be accurate. This should not be used to take actions in countries but to have an overview of the current related news.</i></small>
+			</p>
+
+		</div>
+
+		<div id="map">
+			<div id="tweets-map"></div>
+		</div>
+	</section>
+
+	<!-- topics Section -->
+	<section id="topics">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 mx-auto my-5">
+					<h3>What are the main topics around refugees?</h3>
+
+					<p> Every group of nodes with the same color represent a topic. Sometimes topics intersect which explains why edges can be found between two different colors</p>
+					<div id='topicsdiv'><svg id='svgtopics' width="1060" height="550" ></svg></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- wordcloud Section -->
+	<section id="wordcloud" class="bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 mx-auto my-5">
+					<h3>What are the top frequent words co-ocurring with the word 'refugee'</h3>
+					<p>This word cloud contains top 100 most common words occurring in articles after removing stop words.  You can hover over each word to see the number of occurences. </b></p>
+					<div id="wordclouddiv"><div id="cloud-chart"  width="1060" height="550"></div></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+		<!-- networkofwords Section -->
+		<section id="networkofwords">
+			<div class="container">
+
+				<div class="row pt-5 pb-3">
+					<h3>How do certain words (or thoughts) come to be associated with refugee issues?</h3>
+
+					<p> Zooming into the network of words related to refugees (Ego Network). By chosing the word refugee as a root and looking into the most frequent words and their relations. Nodes in red are first degree nodes, while the yellow nodes are second. Thickness of edge represents the frequency of words appearin together </p>
+					<p>Hover on nodes to see how words are connected </p>
+					<div id='ego'>
+						<svg id='svgego' width="1060" height="700" style='background-color:white'></svg>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="bg-black small text-center text-white-50">
+			<div class="container">
+				Refugees are __________________ 2018
+			</div>
+		</footer>
+
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+		<!-- Other JavaScript Libraries -->
+		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+
+		<!-- High Charts Libraries -->
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
+		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+		<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+		        integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+		        crossorigin=""></script>
+
+
+		<!-- Custom scripts for this template -->
+		<script src="js/custom.js"></script>
+
+	</body>
+
+	</html>

@@ -1,0 +1,111 @@
+
+@import 'variables.scss';
+@import 'mixins.scss';
+@import 'navbar.scss';
+@import 'masthead.scss';
+@import 'buttons.scss';
+@import 'about.scss';
+@import 'projects.scss';
+@import 'contact.scss';
+
+body {
+	font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: 'Montserrat', sans-serif !important;
+	font-weight: bold !important;
+}
+
+.text-white-70{
+	color: rgba(255,255,255,.7)
+}
+
+#tweets-map { height: 500px}
+
+.case{display: none;word-wrap: break-word;}
+.case.active{display: block}
+.leaflet-popup-content {min-width: 300px}
+.case span {
+
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+}
+
+.leaflet-right .info{
+	background: rgba(255,255,255,.5);
+	padding: 20px 20px
+}
+
+.leaflet-right .info b{
+	display: block;
+}
+
+
+.links line {
+	stroke: #999;
+	stroke-opacity: 0.3;
+}
+
+.linksTopics line {
+	stroke: #999;
+	stroke-opacity: 0.5;
+}
+
+.nodes circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+text {
+	color:black;
+	font-family: Source Sans Pro;
+	font-size: 16px;
+}
+.link {
+	stroke: #c1c1c1;
+	pointer-events: all;
+}
+
+.node circle {
+	pointer-events: all;
+	stroke: #777;
+	stroke-width: 1px;
+}
+
+
+
+
+
+
+
+
+
+
+
+a {
+  color: $primary;
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    color: darken($primary, 20%);
+  }
+}
+
+.bg-black {
+  background-color: $black !important;
+}
+
+.bg-primary {
+  background-color: $primary !important;
+}
+
+.text-primary {
+  color: $primary !important;
+}
+
+footer {
+  padding: 5rem 0;
+}

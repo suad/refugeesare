@@ -1,0 +1,21 @@
+.masthead {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 13rem 0 15rem;
+  background: linear-gradient(to top, rgba(22, 22, 22, 0.5) 0%, rgba(22, 22, 22, 0.75) 75%, #161616 100%), url(../img/rr-header.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  h1 {
+	  font-size: 4rem;
+  }
+	a{
+		&:focus, &:hover{
+			color: white;
+			opacity: .8
+		}
+	}
+}
